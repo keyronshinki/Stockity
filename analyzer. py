@@ -1,0 +1,16 @@
+from utils.image_tools import extract_text
+import re
+
+def analyze_image(image_path):
+    text = extract_text(image_path).lower()
+
+    if "buy" in text:
+        return "📈 Sinyal terdeteksi: **ENTRY BUY**"
+    elif "sell" in text:
+        return "📉 Sinyal terdeteksi: **ENTRY SELL**"
+    elif re.search(r'\b(resistance|breakout|strong up)\b', text):
+        return "🚀 Potensi Breakout / Resistance terdeteksi"
+    elif re.search(r'\b(support|breakdown|strong down)\b', text):
+        return "⚠️ Potensi Breakdown / Support terdeteksi"
+    else:
+        return "❓ Tidak ada sinyal buy/sell yang jelas terdeteksi."
